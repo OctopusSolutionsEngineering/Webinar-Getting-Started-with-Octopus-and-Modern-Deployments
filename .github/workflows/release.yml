@@ -28,12 +28,7 @@ env:
   OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }
 
 on:
-  push:
-    branches: [ "master" ]
   workflow_dispatch:
-
-permissions:
-  contents: read
 
 jobs:
   build:
