@@ -55,8 +55,12 @@ jobs:
         run: dotnet publish RandomQuotes/RandomQuotes.csproj --configuration Release --output "$GITHUB_WORKSPACE/artifacts/RandomQuotes"
        
       - name: Pack RandomQuotes
-        run: |
-            dotnet pack RandomQuotes/RandomQuotes.csproj --configuration Release --no-build --output "$GITHUB_WORKSPACE/artifacts/RandomQuotes" -p:PackageVersion=$PACKAGE_VERSION
+        uses: OctopusDeploy/create-zip-package-action@v3.0.2
+        with:
+          package_id: randomquotes
+          version: $PACKAGE_VERSION
+          output_folder: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"
+          base_path: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"    
        
       - name: Upload artifact for octopus deploy
         uses: OctopusDeploy/push-package-action@v3.0.4
