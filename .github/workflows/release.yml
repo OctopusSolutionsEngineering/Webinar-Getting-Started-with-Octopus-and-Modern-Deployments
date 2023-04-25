@@ -25,7 +25,7 @@ env:
   DOTNET_VERSION: '6.0.x'                 # set this to the .NET Core version to use
   OCTOPUS_URL: ${{ secrets.OCTOPUS_URL }}
   OCTOPUS_API_KEY: ${{ secrets.OCTOPUS_API_KEY }}
-  OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }
+  OCTOPUS_SPACE: ${{ secrets.OCTOPUS_SPACE }}
 
 on:
   workflow_dispatch:
@@ -61,6 +61,6 @@ jobs:
       - name: Upload artifact for octopus deploy
         uses: OctopusDeploy/push-package-action@v3.0.4
         with:
-          packages: RandomQuotes.$PACKAGE_VERSION
+          packages: RandomQuotes
 
 
