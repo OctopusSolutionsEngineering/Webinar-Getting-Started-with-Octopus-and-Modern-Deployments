@@ -100,9 +100,6 @@ step "apply-a-terraform-template" {
                     octopus-environment = "#{Octopus.Environment.Name}"
                     octopus-role = "random-quotes-web"
                   }
-                output "url" {
-                    value = "${azurerm_app_service.example.name}.azurewebsites.net"
-                }
                 }
                 EOT
             Octopus.Action.Terraform.TemplateParameters = "{\"resourcegroupname\":\"demo.octopus.app\",\"webappname\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"environment\":\"#{Octopus.Environment.Name}\",\"location\":\"south central us\",\"region\":\"southcentralus\",\"owner\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"description\":\"RandomQuotes Website\"}"
@@ -121,6 +118,7 @@ step "deploy-an-azure-app-service" {
         action_type = "Octopus.AzureAppService"
         properties = {
             Octopus.Action.Azure.DeploymentType = "Package"
+            Octopus.Action.EnabledFeatures = "Octopus.Features.JsonConfigurationVariables,Octopus.Features.ConfigurationTransforms,Octopus.Features.SubstituteInFiles"
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "octopus-server-built-in"
             Octopus.Action.Package.PackageId = "RandomQuotes"
