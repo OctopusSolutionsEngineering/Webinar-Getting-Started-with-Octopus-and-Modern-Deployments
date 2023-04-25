@@ -100,6 +100,9 @@ step "apply-a-terraform-template" {
                     octopus-environment = "#{Octopus.Environment.Name}"
                     octopus-role = "random-quotes-web"
                   }
+                output "url" {
+                    value = "${azurerm_app_service.example.name}.azurewebsites.net"
+                }
                 }
                 EOT
             Octopus.Action.Terraform.TemplateParameters = "{\"resourcegroupname\":\"demo.octopus.app\",\"webappname\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"environment\":\"#{Octopus.Environment.Name}\",\"location\":\"south central us\",\"region\":\"southcentralus\",\"owner\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"description\":\"RandomQuotes Website\"}"
