@@ -60,8 +60,10 @@ jobs:
           package_id: randomquotes
           version: $PACKAGE_VERSION
           output_folder: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"
-          base_path: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"    
-       
+          base_path: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"
+          files: |
+           **/*.*
+
       - name: Upload artifact for octopus deploy
         uses: OctopusDeploy/push-package-action@v3.0.4
         with:
