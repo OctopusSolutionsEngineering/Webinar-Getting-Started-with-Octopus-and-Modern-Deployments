@@ -7,6 +7,7 @@ step "apply-a-terraform-template" {
             Octopus.Action.AzureAccount.Variable = "Azure.Account"
             Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
             Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
+            Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Terraform.AllowPluginDownloads = "True"
             Octopus.Action.Terraform.AzureAccount = "True"
@@ -104,5 +105,33 @@ step "apply-a-terraform-template" {
             Octopus.Action.Terraform.TemplateParameters = "{\"resourcegroupname\":\"demo.octopus.app\",\"webappname\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"environment\":\"#{Octopus.Environment.Name}\",\"location\":\"south central us\",\"region\":\"southcentralus\",\"owner\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"description\":\"RandomQuotes Website\"}"
         }
         worker_pool_variable = ""
+    }
+}
+
+step "deploy-an-azure-app-service" {
+    name = "Deploy an Azure App Service"
+    properties = {
+        Octopus.Action.TargetRoles = "random-quotes-web"
+    }
+
+    action {
+        action_type = "Octopus.AzureAppService"
+        properties = {
+            Octopus.Action.Azure.DeploymentType = "Package"
+            Octopus.Action.Package.DownloadOnTentacle = "False"
+            Octopus.Action.Package.FeedId = "octopus-server-built-in"
+            Octopus.Action.Package.PackageId = "RandomQuotes"
+            OctopusUseBundledTooling = "False"
+        }
+        worker_pool = "azure-worker-pool"
+
+        packages {
+            acquisition_location = "Server"
+            feed = "octopus-server-built-in"
+            package_id = "RandomQuotes"
+            properties = {
+                SelectionMode = "immediate"
+            }
+        }
     }
 }
