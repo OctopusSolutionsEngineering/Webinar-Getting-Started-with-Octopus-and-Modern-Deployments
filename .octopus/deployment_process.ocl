@@ -7,6 +7,7 @@ step "apply-a-terraform-template" {
             Octopus.Action.AzureAccount.Variable = "Azure.Account"
             Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
             Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
+            Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Terraform.AllowPluginDownloads = "True"
             Octopus.Action.Terraform.AzureAccount = "True"
@@ -20,7 +21,7 @@ step "apply-a-terraform-template" {
                     resource_group_name  = "demo.octopus.app"
                     storage_account_name = "octodemotfstate"
                     container_name       = "terraform-state"
-                    key                  = "random-quotes-#{RandomQuotes.Terraform.StateKey}.terraform.tfstate"
+                    key                  = "Webinar-RandomQuotes-#{Octopus.Environment.Name}.terraform.tfstate"
                   }
                 }
                 
@@ -30,37 +31,37 @@ step "apply-a-terraform-template" {
                 
                 variable "resourcegroupname" {
                   type = "string"
-                  default = "#{RandomQuotes.Azure.ResourceGroup.Name}"
+                  default = "demo.octopus.app"
                 }
                 
                 variable "webappname" {
                   type = "string"
-                  default = "#{RandomQuotes.Azure.WebApp.Name}"
+                  default = "Webinar-RandomQuotes-#{Octopus.Environment.Name}"
                 }
                 
                 variable "environment" {
                   type = "string"
-                  default = "#{RandomQuotes.Environment}"
+                  default = "#{Octopus.Environment.Name}"
                 }
                 
                 variable "location" {
                   type = "string"
-                  default = "#{RandomQuotes.Tenant.Azure.Location}"
+                  default = "south central us"
                 }
                 
                 variable "region" {
                   type = "string"
-                  default = "#{RandomQuotes.Tenant.Azure.Region}"
+                  default = "southcentralus"
                 }
                 
                 variable "owner" {
                   type = "string"
-                  default = "#{Tenant.Key}"
+                  default = "Webinar-RandomQuotes-#{Octopus.Environment.Name}"
                 }
                 
                 variable "description" {
                   type = "string"
-                  default = "#{RandomQuotes.Azure.WebApp.Description}"
+                  default = "RandomQuotes Website"
                 }
                 
                 resource "azurerm_app_service_plan" "main" {
@@ -98,7 +99,6 @@ step "apply-a-terraform-template" {
                     owner       = "${var.owner}"
                     octopus-environment = "#{Octopus.Environment.Name}"
                     octopus-role = "random-quotes-web"
-                    octopus-tenant = "#{Octopus.Deployment.Tenant.Name}"
                   }
                 }
                 EOT
