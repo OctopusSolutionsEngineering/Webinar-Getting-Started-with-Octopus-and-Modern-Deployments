@@ -7,7 +7,6 @@ step "apply-a-terraform-template" {
             Octopus.Action.AzureAccount.Variable = "Azure.Account"
             Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
             Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
-            Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Terraform.AllowPluginDownloads = "True"
             Octopus.Action.Terraform.AzureAccount = "True"
@@ -102,7 +101,7 @@ step "apply-a-terraform-template" {
                   }
                 }
                 EOT
-            Octopus.Action.Terraform.TemplateParameters = "{\"resourcegroupname\":\"#{RandomQuotes.Azure.ResourceGroup.Name}\",\"webappname\":\"#{RandomQuotes.Azure.WebApp.Name}\",\"environment\":\"#{RandomQuotes.Environment}\",\"location\":\"#{RandomQuotes.Tenant.Azure.Location}\",\"region\":\"#{RandomQuotes.Tenant.Azure.Region}\",\"owner\":\"#{Tenant.Key}\",\"description\":\"#{RandomQuotes.Azure.WebApp.Description}\"}"
+            Octopus.Action.Terraform.TemplateParameters = "{\"resourcegroupname\":\"demo.octopus.app\",\"webappname\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"environment\":\"#{Octopus.Environment.Name}\",\"location\":\"south central us\",\"region\":\"southcentralus\",\"owner\":\"Webinar-RandomQuotes-#{Octopus.Environment.Name}\",\"description\":\"RandomQuotes Website\"}"
         }
         worker_pool_variable = ""
     }
