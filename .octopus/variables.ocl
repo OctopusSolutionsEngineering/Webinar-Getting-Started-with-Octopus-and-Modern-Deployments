@@ -1,0 +1,5 @@
+variable "Azure.Account" {
+    type = "AzureAccount"
+
+    value "octofx-azure-subscription" {}
+}
