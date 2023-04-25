@@ -3,3 +3,11 @@ variable "Azure.Account" {
 
     value "octofx-azure-subscription" {}
 }
+
+variable "Octopus.Azure.Account" {
+    type = "AzureAccount"
+
+    value "octofx-azure-subscription" {
+        description = ""
+    }
+}
