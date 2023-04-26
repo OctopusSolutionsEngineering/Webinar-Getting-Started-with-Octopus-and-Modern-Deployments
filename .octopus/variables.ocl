@@ -5,3 +5,11 @@ variable "Octopus.Azure.Account" {
         description = ""
     }
 }
+
+variable "AppSettings:EnvironmentName" {
+    value "#{Octopus.Environment.Name}" {}
+}
+
+variable "AppSettings:AppVersion" {
+    value "#{Octopus.Release.Number}" {}
+}
