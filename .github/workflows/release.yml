@@ -47,6 +47,6 @@ jobs:
       - name: Upload artifact for octopus deploy
         uses: OctopusDeploy/push-package-action@v3.0.4
         with:
-          packages: artifacts/RandomQuotes.${{ steps.version-generator.outputs.version }}.zip
+          packages: artifacts/RandomQuotes/randomquotes.${{ steps.version-generator.outputs.version }}.zip
 
 
