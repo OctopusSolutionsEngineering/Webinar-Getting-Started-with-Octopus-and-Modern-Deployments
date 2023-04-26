@@ -39,8 +39,8 @@ jobs:
         with:
           package_id: randomquotes
           version: "${{ steps.version-generator.outputs.version }}"
-          output_folder: "$GITHUB_WORKSPACE/artifacts/RandomQuotes"
-          base_path: "$GITHUB_WORKSPACE/artifacts/RandomQuotes/"
+          output_folder: "artifacts/RandomQuotes"
+          base_path: "artifacts/RandomQuotes/"
           files: |
            **/*.*
 
