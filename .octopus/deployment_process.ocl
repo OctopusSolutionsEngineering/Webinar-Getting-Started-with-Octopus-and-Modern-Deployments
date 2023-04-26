@@ -121,7 +121,7 @@ step "deploy-an-azure-app-service" {
             Octopus.Action.EnabledFeatures = "Octopus.Features.JsonConfigurationVariables,Octopus.Features.ConfigurationTransforms,Octopus.Features.SubstituteInFiles"
             Octopus.Action.Package.DownloadOnTentacle = "False"
             Octopus.Action.Package.FeedId = "octopus-server-built-in"
-            Octopus.Action.Package.PackageId = "RandomQuotes"
+            Octopus.Action.Package.PackageId = "randomquotes"
             OctopusUseBundledTooling = "False"
         }
         worker_pool = "azure-worker-pool"
@@ -129,7 +129,7 @@ step "deploy-an-azure-app-service" {
         packages {
             acquisition_location = "Server"
             feed = "octopus-server-built-in"
-            package_id = "RandomQuotes"
+            package_id = "randomquotes"
             properties = {
                 SelectionMode = "immediate"
             }
