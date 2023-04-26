@@ -8,6 +8,7 @@ step "manual-intervention-required" {
             Octopus.Action.Manual.BlockConcurrentDeployments = "False"
             Octopus.Action.Manual.Instructions = "Please allow apporval"
             Octopus.Action.Manual.ResponsibleTeamIds = "global/demo-presenters"
+            Octopus.Action.RunOnServer = "false"
         }
     }
 }
@@ -18,11 +19,13 @@ step "apply-a-terraform-template" {
     action {
         action_type = "Octopus.TerraformApply"
         properties = {
+            Octopus.Action.AzureAccount.Variable = "Octopus.Azure.Account"
             Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
             Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
+            Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Terraform.AllowPluginDownloads = "True"
-            Octopus.Action.Terraform.AzureAccount = "False"
+            Octopus.Action.Terraform.AzureAccount = "True"
             Octopus.Action.Terraform.GoogleCloudAccount = "False"
             Octopus.Action.Terraform.ManagedAccount = "None"
             Octopus.Action.Terraform.PlanJsonOutput = "False"
@@ -134,6 +137,7 @@ step "deploy-an-azure-app-service" {
             Octopus.Action.Package.FeedId = "octopus-server-built-in"
             Octopus.Action.Package.JsonConfigurationVariablesTargets = "appsetting.json"
             Octopus.Action.Package.PackageId = "randomquotes"
+            Octopus.Action.RunOnServer = "false"
             OctopusUseBundledTooling = "False"
         }
         worker_pool_variable = ""
