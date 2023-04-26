@@ -160,12 +160,13 @@ step "destroy-terraform-resources" {
     action {
         action_type = "Octopus.TerraformDestroy"
         properties = {
+            Octopus.Action.AzureAccount.Variable = "Octopus.Azure.Account"
             Octopus.Action.GoogleCloud.ImpersonateServiceAccount = "False"
             Octopus.Action.GoogleCloud.UseVMServiceAccount = "True"
             Octopus.Action.RunOnServer = "false"
             Octopus.Action.Script.ScriptSource = "Inline"
             Octopus.Action.Terraform.AllowPluginDownloads = "True"
-            Octopus.Action.Terraform.AzureAccount = "False"
+            Octopus.Action.Terraform.AzureAccount = "True"
             Octopus.Action.Terraform.GoogleCloudAccount = "False"
             Octopus.Action.Terraform.ManagedAccount = "None"
             Octopus.Action.Terraform.PlanJsonOutput = "False"
